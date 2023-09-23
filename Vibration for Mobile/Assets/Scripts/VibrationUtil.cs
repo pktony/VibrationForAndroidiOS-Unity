@@ -93,9 +93,9 @@ namespace VibrationUtility
         {
             if (pattern == null || amplitude == null)
             {
-                if (pattern == null)
+                if (pattern == null || pattern.Length == 0)
                     Debug.LogWarning("Pattern is null");
-                if (amplitude == null)
+                if (amplitude == null || amplitude.Length == 0)
                     Debug.LogWarning("Amplitude is null");
 
                 return;
@@ -130,12 +130,14 @@ namespace VibrationUtility
 			switch (vibrationType)
 			{
 				case VibrationType.Peek:
-					break;
+                    CreateOneShot(LengthType.VeryLong.time, AmplitudeType.light.amplitude);
+                    break;
 				case VibrationType.Pop:
 					CreateOneShot(LengthType.VeryLong.time, -1);
 					break;
 				case VibrationType.Nope:
-					break;
+					throw new System.NotImplementedException();
+					//break;
 				case VibrationType.Heavy:
 					CreateOneShot(LengthType.Medium.time, AmplitudeType.heavy.amplitude);
                     break;
@@ -154,11 +156,11 @@ namespace VibrationUtility
                 case VibrationType.Error:
 					var pattern = new long[8]
 					{
-						0, 50,
-						30, 50,
-						30, 50,
-						30, 80
-					};
+						0, LengthType.Long.time,
+                        LengthType.Medium.time, LengthType.Long.time,
+                        LengthType.Medium.time, LengthType.Long.time,
+                        LengthType.Medium.time, LengthType.VeryLong.time
+                    };
 					var patternAmplitude = new int[8]
 					{
 						0, AmplitudeType.medium.amplitude,
@@ -171,9 +173,9 @@ namespace VibrationUtility
 				case VibrationType.Success:
                     pattern = new long[4]
 					{
-						0, 30,
-						30, 30
-					};
+						0, LengthType.Medium.time,
+                        LengthType.Medium.time, LengthType.Medium.time
+                    };
                     patternAmplitude = new int[4]
 					{
 						0, AmplitudeType.medium.amplitude,
@@ -184,9 +186,9 @@ namespace VibrationUtility
 				case VibrationType.Warning:
                     pattern = new long[4]
 					{
-						0, 30,
-						80, 30
-					};
+						0, LengthType.Medium.time,
+                        LengthType.VeryLong.time, LengthType.Medium.time
+                    };
                     patternAmplitude = new int[4]
 					{
 						0, AmplitudeType.heavy.amplitude,
@@ -230,6 +232,7 @@ namespace VibrationUtility
         //https://developer.apple.com/documentation/audiotoolbox/1405202-audioservicesplayalertsound
         //https://github.com/TUNER88/iOSSystemSoundsLibrary
         //https://nikaeblog.wordpress.com/2017/07/11/system-sound-id-list-ios/
+        //https://iphonedev.wiki/index.php/AudioServices
         Default = 1352, // (iOS) Vibrates regardless of system sound setting
         Peek = 1519,
         Pop = 1520,
@@ -248,6 +251,8 @@ namespace VibrationUtility
         Error,
         Success,
         Warning,
+
+		Tick,
     }
 
     /// <summary>
