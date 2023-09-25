@@ -14,6 +14,8 @@ namespace Sample
         {
             SetListeners();
             VibrationUtil.Init();
+
+            Admanager.Inst.Init();
         }
 
         private void SetListeners()
