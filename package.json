@@ -1,0 +1,31 @@
+{
+  "name": "com.isdororok.vibrationformobile-unity",
+  "displayName": "Mobile Vibration For Unity",
+  "description": "Mobile Vibration Utility For Unity",
+  "version": "1.0.0",
+  "unity": "2021.3.25f1",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pktony/VibrationForAndroidiOS-Unity.git"
+  },
+  "author": {
+    "name": "isdororok",
+    "email": "pktony2011@gmail.com",
+    "url": "https://github.com/pktony"
+  },
+  "dependencies": {},
+  "keywords": [
+    "vibration",
+    "android",
+    "ios",
+    "unity"
+  ],
+  "samples": [
+    {
+      "displayName": "Sample",
+      "description": "Vibration Sample Scene",
+      "path": "Vibration for Mobile/Sample"
+    }
+  ]
+}
