@@ -1,224 +1,60 @@
+using System;
 using UnityEngine;
 
 namespace VibrationUtility
 {
+    using Instance;
+
     public class VibrationUtil
-    {
-#if UNITY_IOS
-		[DllImport("__Internal")]
-		public static extern void Vibrate(int _n);
-		[DllImport("__Internal")]
-		public static extern void _impactOccurred(string style);
-		[DllImport("__Internal")]
-		public static extern void _notificationOccurred(string style);
-#endif
+    { 
+		private static VibrationInstance vibrationInstance;
 
+		public static void Init()
+		{
+            try
+            {
 #if UNITY_ANDROID
-		private static AndroidJavaObject vibrator;
-		public static AndroidJavaObject Vibrator
-		{
-			get
-			{
-				if(vibrator == null)
-				{
-					var player = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-					var currentActivity = player.GetStatic<AndroidJavaObject>("currentActivity");
-					vibrator = currentActivity.Call<AndroidJavaObject>("getSystemService", "vibrator");
-				}
-
-				return vibrator;
-			}
-		}
-
-		private static AndroidJavaClass vibrationEffectClass;
-		public static AndroidJavaClass VibrationEffectClass
-		{
-			get
-			{
-				if (vibrationEffectClass == null)
-				{
-					vibrationEffectClass = new AndroidJavaClass("android.os.VibrationEffect");
-					//defaultAmplitude = vibrationEffectClass.GetStatic<int>("DEFAULT_AMPLITUDE");
-					//Debug.Log($"Vibration Default Amplitude : {defaultAmplitude}");
-				}
-				return vibrationEffectClass;
-			}
-		}
+                vibrationInstance = new VibrationAndroid();
+#elif UNITY_IOS
+                vibrationInstance = new VibrationIOS();
 #endif
+            }catch(Exception e)
+            {
+                Debug.LogError($"Vibration Utility - Failed to Initialize : {e}");
+                return;
+            }
+            Debug.Log($"Vibration Utility - Initialized Successfully {vibrationInstance}");
+        }
 
         /// <summary>
-        /// Vibrate both for Android / iOS <br/>
-		/// Android API >= 26
+        /// Vibrate using pre-defined types.<br/>
+        /// note : Customized vibration is allowed only in Android
         /// </summary>
-        /// <param name="vibrationType"></param>
-        /// <param name="duration"> milli second</param>
+        /// <param name="vibrationType">Pre-defined Vibration Types<br/>
+        /// see <see cref="VibrationType"/>
+        /// </param>
         public static void Vibrate(VibrationType vibrationType)
         {
             if (!Application.isMobilePlatform) return;
-#if UNITY_ANDROID
-			VibrateAndroid(vibrationType);
-#elif UNITY_IOS
-			switch(vibrationType)
-			{
-				case VibrationType.Default:
-				case VibrationType.Peek:
-				case VibrationType.Pop:
-				case VibrationType.Nope:
-					Vibrate((int)vibrationType);
-					break;
-
-				case VibrationType.Heavy:
-				case VibrationType.Medium:
-				case VibrationType.Light:
-				case VibrationType.Rigid:
-				case VibrationType.Soft:
-					_impactOccurred(vibrationType.ToString());
-					break;
-				default:
-					_notificationOccurred(vibrationType.ToString());
-					break;
-			}
-#endif
-        }
-
-
-#if UNITY_ANDROID
-        /// <summary>
-        /// Customizable vibration <br/>
-		/// Android Only : >= API 26
-        /// </summary>
-        /// <param name="pattern"></param>
-        /// <param name="amplitude"></param>
-        public static void VibrateCustom(long[] pattern, int[] amplitude)
-        {
-            if (pattern == null || amplitude == null)
+            if (vibrationInstance == null)
             {
-                if (pattern == null || pattern.Length == 0)
-                    Debug.LogWarning("Pattern is null");
-                if (amplitude == null || amplitude.Length == 0)
-                    Debug.LogWarning("Amplitude is null");
-
+                Debug.LogWarning($"Vibration Util : Vibrator is null");
                 return;
             }
 
-            CreateWaveform(pattern, amplitude, -1);
-        }
+            vibrationInstance.Vibrate(vibrationType);
+		}
 
-		/// <summary>
-		/// Vibrates for certain duration. <br/>
-		/// Android Only !!!
-		/// </summary>
-		/// <param name="duration">milli second</param>
-		/// <param name="amplitude">1 ~ 255</param>
-		public static void VibrateFor(long duration, int amplitude)
-		{
+        public static void VibrateCustomized(long[] pattern, int[] amplitude)
+        {
 #if !UNITY_ANDROID
-			Debug.LogWarning("Vibration Util -- Android only funcion -- VibrateFor()");
-			return;
+            return;
 #endif
-			CreateOneShot(duration, amplitude);
-		}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="vibrationType">Type of Vibration</param>
-        /// <param name="amplitude">must be between 1~255 :::
-        /// System Default Value is -1 </param>
-        private static void VibrateAndroid(VibrationType vibrationType)
-		{
-			switch (vibrationType)
-			{
-				case VibrationType.Peek:
-                    CreateOneShot(LengthType.VeryLong.time, AmplitudeType.light.amplitude);
-                    break;
-				case VibrationType.Pop:
-					CreateOneShot(LengthType.VeryLong.time, -1);
-					break;
-				case VibrationType.Nope:
-					throw new System.NotImplementedException();
-					//break;
-				case VibrationType.Heavy:
-					CreateOneShot(LengthType.Medium.time, AmplitudeType.heavy.amplitude);
-                    break;
-				case VibrationType.Medium:
-                    CreateOneShot(LengthType.Medium.time, AmplitudeType.medium.amplitude);
-                    break;
-				case VibrationType.Light:
-                    CreateOneShot(LengthType.Medium.time, AmplitudeType.light.amplitude);
-                    break;
-				case VibrationType.Rigid:
-                    CreateOneShot(LengthType.Short.time, AmplitudeType.rigid.amplitude);
-                    break;
-                case VibrationType.Soft:
-                    CreateOneShot(LengthType.Long.time, AmplitudeType.light.amplitude);
-                    break;
-                case VibrationType.Error:
-					var pattern = new long[8]
-					{
-						0, LengthType.Long.time,
-                        LengthType.Medium.time, LengthType.Long.time,
-                        LengthType.Medium.time, LengthType.Long.time,
-                        LengthType.Medium.time, LengthType.VeryLong.time
-                    };
-					var patternAmplitude = new int[8]
-					{
-						0, AmplitudeType.medium.amplitude,
-						0, AmplitudeType.medium.amplitude,
-						0, AmplitudeType.medium.amplitude,
-						0, AmplitudeType.medium.amplitude
-					};
-					CreateWaveform(pattern, patternAmplitude, -1);
-					break;
-				case VibrationType.Success:
-                    pattern = new long[4]
-					{
-						0, LengthType.Medium.time,
-                        LengthType.Medium.time, LengthType.Medium.time
-                    };
-                    patternAmplitude = new int[4]
-					{
-						0, AmplitudeType.medium.amplitude,
-						0, AmplitudeType.heavy.amplitude
-					};
-                    CreateWaveform(pattern, patternAmplitude, -1);
-                    break;
-				case VibrationType.Warning:
-                    pattern = new long[4]
-					{
-						0, LengthType.Medium.time,
-                        LengthType.VeryLong.time, LengthType.Medium.time
-                    };
-                    patternAmplitude = new int[4]
-					{
-						0, AmplitudeType.heavy.amplitude,
-						0, AmplitudeType.medium.amplitude
-					};
-                    CreateWaveform(pattern, patternAmplitude, -1);
-                    break;
-				default:
-					CreateOneShot(500, -1);
-					break;
-			}
 
-			/// Pattern : { 1000, 200, 1000, 200}
-			/// 1초 쉬고, 0.2초 진동, 1초 쉬고, 0.2초 진동
-			/// Repeat : 1 = true , -1 : false
-			//Vibrator.Call("vibrate", pattern , -1); //deprecated in API 26
-		}
+            vibrationInstance.VibrateCustom(pattern, amplitude);
 
-		private static void CreateOneShot(long milliseconds, int amplitude)
-		{
-			var vibrateEffect = VibrationEffectClass.CallStatic<AndroidJavaObject>("createOneShot", new object[] { milliseconds, amplitude });
-			Vibrator.Call("vibrate", vibrateEffect);
-		}
-
-		private static void CreateWaveform(long[] pattern, int[] amplitude, int repeat)
-		{
-			var vibrateEffect = VibrationEffectClass.CallStatic<AndroidJavaObject>("createWaveform", new object[] { pattern, amplitude, repeat });
-			Vibrator.Call("vibrate", vibrateEffect);
-		}
-#endif
+        }
     }
 
 	/// <summary>
@@ -251,8 +87,6 @@ namespace VibrationUtility
         Error,
         Success,
         Warning,
-
-		Tick,
     }
 
     /// <summary>
@@ -272,6 +106,11 @@ namespace VibrationUtility
         /// Must be between 1 ~ 255
         /// </summary>
         private const int defaultAmplitude = 100;
+
+        public static AmplitudeType veryWeak = new(10);
+        public static AmplitudeType weak = new(20);
+        public static AmplitudeType strong = new(150);
+        public static AmplitudeType veryStrong = new(200);
 
 		public static AmplitudeType medium = new(defaultAmplitude);
 		public static AmplitudeType heavy = new((int)(defaultAmplitude * 1.5f));
