@@ -1,0 +1,21 @@
+  {
+  "name": "isdororok.vibrationformobile-unity",
+    "references": [
+        "isdororok.vibrationformobile-unity.Runtime",
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.isdororok.vibrationformobile-unity",
+            "expression": "7.1.0",
+            "define": "HDRP_7_1_0_OR_NEWER"
+        }
+    ],
+    "noEngineReferences": false
+}
