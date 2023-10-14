@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,11 +8,11 @@ namespace Sample
 {
     public class SampleCode : MonoBehaviour
     {
-        [SerializeField] private UIs uis = null;
-
+        [SerializeField] private UIController uis = null;
 
         private void Awake()
         {
+            Application.targetFrameRate = 61;
             SetListeners();
             VibrationUtil.Init();
         }
@@ -32,6 +33,7 @@ namespace Sample
             uis.warningVibrationListener = VibrateWarning;
 
             uis.customizedVibrationListener = VibrateCustomized;
+            uis.githubButtonListener = OpenGithubPage;
         }
 
         private void VibrateCustomized()
@@ -124,6 +126,11 @@ namespace Sample
         private void VibrateDefault()
         {
             VibrationUtil.Vibrate(VibrationType.Default);
+        }
+
+        private void OpenGithubPage()
+        {
+            Application.OpenURL("https://github.com/pktony/VibrationForAndroidiOS-Unity");
         }
     }
 }

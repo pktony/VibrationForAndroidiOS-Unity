@@ -1,13 +1,15 @@
 # Vibration for Android and iOS (Unity)
 ## Introduction
-I made this vibration utility for Unity to ease your app development.
+I made this "vibration utility for Unity" to ease your app development.<br/>
+When I developed the vibration with Unity at work, I spent a lot of time testing the vibration, and getting feedbacks. <br/>
+Here are the sample codes and plugin(iOS) ready for you! <br/>
 Feel free to use my script and sample app!
 
 All of the scripts are written per official AOS/iOS documents.<br/>
 Please don't forget to read the document before use.<br/>
 <b>Refer to the "Reference" section for details.</b><br/>
 
-All of the android predefined vibration types are made by trial and error. <br/>
+All of the Android predefined vibration types are made by trial and errors. <br/>
 Tried my best to make AOS vibration as similar as iOS predefined vibration types. <br/>
 Try out my sample app to customize your own vibration conveniently.
 

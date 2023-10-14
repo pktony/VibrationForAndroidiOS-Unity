@@ -9,7 +9,7 @@ extern "C"
     }
 
     void _impactOccurred(const char* style)
-{
+    {
 
         UIImpactFeedbackStyle feedbackStyle;
 
@@ -40,7 +40,7 @@ extern "C"
     }
 
     void _notificationOccurred(const char* style)
-{
+    {
         UINotificationFeedbackType feedbackStyle;
         if (strcmp(style, "Error") == 0)
             feedbackStyle = UINotificationFeedbackTypeError;
