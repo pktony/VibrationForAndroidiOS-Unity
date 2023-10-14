@@ -7,12 +7,17 @@ using TMPro;
 
 namespace Sample
 {
-    public class UIs : MonoBehaviour
+    public class UIController : MonoBehaviour
     {
+        [SerializeField] private SidebarUIController sidebarUIController;
+
         [SerializeField] private Button[] vibrateButtons = null;
         [SerializeField] private Button customizeButton = null;
         [SerializeField] private TMP_InputField patternInput = null;
         [SerializeField] private TMP_InputField amplitudeInput = null;
+
+        [SerializeField] private Button githubButton = null;
+        [SerializeField] private Button informationButton = null;
 
         public Action defaultVibrationListener;
         public Action peekVibrationListener;
@@ -28,6 +33,8 @@ namespace Sample
         public Action warningVibrationListener;
 
         public Action customizedVibrationListener;
+
+        public Action githubButtonListener;
 
 
         private void Awake()
@@ -46,6 +53,14 @@ namespace Sample
             vibrateButtons[11].onClick.AddListener(() => warningVibrationListener?.Invoke());
 
             customizeButton.onClick.AddListener(() => customizedVibrationListener?.Invoke());
+
+            githubButton.onClick.AddListener(() => githubButtonListener?.Invoke());
+            informationButton.onClick.AddListener(OpenSidebar);
+        }
+
+        private void OpenSidebar()
+        {
+            sidebarUIController.OpenSidebar();
         }
 
         public string GetPatternInput()
