@@ -5,15 +5,16 @@ namespace VibrationUtility.Instance
 {
     public class VibrationIOS : VibrationInstance
     {
-
 		[DllImport("__Internal")]
 		public static extern void Vibrate(int _n);
 		[DllImport("__Internal")]
 		public static extern void _impactOccurred(string style);
-		[DllImport("__Internal")]
+        [DllImport("__Internal")]
+        public static extern void _impactOccurredWithIntensity(string style, float intensity);
+        [DllImport("__Internal")]
 		public static extern void _notificationOccurred(string style);
 		
-        public override void Vibrate(VibrationType vibrationType)
+        public override void Vibrate(VibrationType vibrationType, float intensity)
         {
 			switch(vibrationType)
 			{
@@ -29,7 +30,7 @@ namespace VibrationUtility.Instance
 				case VibrationType.Light:
 				case VibrationType.Rigid:
 				case VibrationType.Soft:
-					_impactOccurred(vibrationType.ToString());
+					_impactOccurredWithIntensity(vibrationType.ToString(), intensity);
 					break;
 				default:
 					_notificationOccurred(vibrationType.ToString());

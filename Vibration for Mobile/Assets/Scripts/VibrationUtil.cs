@@ -33,16 +33,16 @@ namespace VibrationUtility
         /// <param name="vibrationType">Pre-defined Vibration Types<br/>
         /// see <see cref="VibrationType"/>
         /// </param>
-        public static void Vibrate(VibrationType vibrationType)
+        public static void Vibrate(VibrationType vibrationType, float intensity = 1.0f)
         {
             if (!Application.isMobilePlatform) return;
             if (vibrationInstance == null)
             {
-                Debug.LogWarning($"Vibration Util : Vibrator is null");
+                Debug.LogWarning($"Vibration Util : Vibrator is null. Initialize First");
                 return;
             }
 
-            vibrationInstance.Vibrate(vibrationType);
+            vibrationInstance.Vibrate(vibrationType, intensity);
 		}
 
         public static void VibrateCustomized(long[] pattern, int[] amplitude)

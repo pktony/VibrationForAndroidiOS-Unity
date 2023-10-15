@@ -157,7 +157,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.IsDororok.VibrationTester
     Standalone: com.DefaultCompany.2DProject
-    iPhone: com.IsDororok.VibrationForMobile
+    iPhone: com.IsDororok.VibrationTester
   buildNumber:
     Standalone: 0
     iPhone: 0

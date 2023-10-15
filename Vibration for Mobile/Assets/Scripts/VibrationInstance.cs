@@ -9,7 +9,7 @@ namespace VibrationUtility.Instance
         /// <param name="vibrationType">Pre-defined Vibration Types<br/>
         /// see <see cref="VibrationType"/>
         /// </param>
-        public abstract void Vibrate(VibrationType vibrationType);
+        public abstract void Vibrate(VibrationType vibrationType, float intensity);
         public abstract void VibrateCustom(long[] pattern, int[] amplitude);
 
         protected abstract bool IsVibrationAvailable();
