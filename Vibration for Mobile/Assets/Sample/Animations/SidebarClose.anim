@@ -59,7 +59,7 @@ AnimationClip:
         outWeight: 0
       - serializedVersion: 3
         time: 0.3
-        value: -1080
+        value: -783
         inSlope: 0
         outSlope: 0
         tangentMode: 0

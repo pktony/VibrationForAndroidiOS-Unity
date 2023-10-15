@@ -60,6 +60,8 @@ namespace Sample
                 "m_AnchoredPosition.x", curve);
 
             anim.Play(clips[(int)SidebarAnimationType.close].name);
+
+            Admanager.Inst.SetActiveBannerAd(true);
         }
 
         private void OpenAOSVibratorLink()

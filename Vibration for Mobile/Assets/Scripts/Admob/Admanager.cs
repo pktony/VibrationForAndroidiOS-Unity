@@ -49,10 +49,10 @@ namespace Sample
                 bannerID = ids.bannerAd;
                 intersitialID = ids.interAd;
 
-                Debug.Log($"Banner Ad ID : {bannerID}");
-                Debug.Log($"inter Ad ID : {intersitialID}");
+                //Debug.Log($"Banner Ad ID : {bannerID}");
+                //Debug.Log($"inter Ad ID : {intersitialID}");
 
-                ShowInterstitialAd();
+                //ShowInterstitialAd();
                 ShowBannerAd();
             });
         }
@@ -65,7 +65,7 @@ namespace Sample
                 banner = null;
             }
 
-            var size = AdSize.GetLandscapeAnchoredAdaptiveBannerAdSizeWithWidth(150);
+            var size = AdSize.GetLandscapeAnchoredAdaptiveBannerAdSizeWithWidth(300);
             banner = new BannerView(bannerID, size, AdPosition.Bottom);
         }
 
@@ -78,8 +78,20 @@ namespace Sample
             }
 
             var adRequest = new AdRequest();
-
             banner.LoadAd(adRequest);
+        }
+
+        public void SetActiveBannerAd(bool isActive)
+        {
+            if (banner == null)
+            {
+                ShowBannerAd();
+            }
+
+            if (isActive)
+                banner.Show();
+            else
+                banner.Hide();
         }
 
         private void LoadInterstitialAd(Action loadCompleteAction)

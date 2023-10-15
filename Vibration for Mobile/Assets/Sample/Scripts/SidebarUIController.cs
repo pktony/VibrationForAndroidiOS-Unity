@@ -8,6 +8,7 @@ namespace Sample
 
         public void OpenSidebar()
         {
+            Admanager.Inst.SetActiveBannerAd(false);
             sidebarUI.OpenSidebar();
         }
 
