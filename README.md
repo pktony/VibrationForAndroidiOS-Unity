@@ -1,6 +1,6 @@
 # Vibration for Android and iOS (Unity)
 
-[Introduction](introduction) | [Sample App](sample-app) | [Installation](installation) | [Code Overview](code-overview)
+[Introduction](#introduction) | [Sample App](#sample-app) | [Installation](#installation) | [Code Overview](#code-overview)
 
 ## Introduction
 I made this "vibration utility for Unity" to ease your app development.<br/>
