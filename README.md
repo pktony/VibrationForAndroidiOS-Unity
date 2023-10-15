@@ -1,4 +1,7 @@
 # Vibration for Android and iOS (Unity)
+
+[Introduction](introduction) | [Sample App](sample-app) | [Installation](installation) | [Code Overview](code-overview)
+
 ## Introduction
 I made this "vibration utility for Unity" to ease your app development.<br/>
 When I developed the vibration with Unity at work, I spent a lot of time testing the vibration, and getting feedbacks. <br/>
@@ -18,7 +21,20 @@ Submit issues if you have any. I will reply to your issues ASAP.
 (Enhancement, bugs, advice, etc)
 
 ### Sample App
-- Coming soon on Goole Play Store
+[Vibration Test (AOS)](https://play.google.com/store/apps/details?id=com.IsDororok.VibrationTester)
+
+## Installation
+- Copy all files in ./Assets/Scripts/
+  - VibrationAndroid.cs
+  - VibrationInstance.cs
+  - VibrationIOS.cs
+  - VibrationUtil.cs
+
+- Android :
+  - Add `<uses-permission android:name = "android.permission.VIBRATE"/>` in your AndroidManifest.xml
+- iOS :
+  * Copy plugin file in ./Assets/Plugins
+    * VibrationPlugin.mm
 
 ## Requirements
 - Android
@@ -33,7 +49,6 @@ Submit issues if you have any. I will reply to your issues ASAP.
 - Iphone 12 mini (iOS 16 & 17)
 
 ## Code Overview
-
 ### VibrationUtil
 #### Vibrate
 ```
