@@ -12,6 +12,6 @@ namespace VibrationUtility.Instance
         public abstract void Vibrate(VibrationType vibrationType, float intensity);
         public abstract void VibrateCustom(long[] pattern, int[] amplitude);
 
-        protected abstract bool IsVibrationAvailable();
+        public abstract bool IsVibrationAvailable();
     }
 }

@@ -5,6 +5,14 @@ namespace VibrationUtility.Instance
 {
     public class VibrationAndroid : VibrationInstance
     {
+        private float intensity;
+
+        public VibrationAndroid()
+        {
+            if(Application.isEditor || !IsVibrationAvailable())
+                throw new System.NotSupportedException();
+        }
+
         private AndroidJavaObject vibrator;
         public AndroidJavaObject Vibrator
         {
@@ -47,13 +55,15 @@ namespace VibrationUtility.Instance
             }
         }
 
-        public override void Vibrate(VibrationType vibrationType)
+        public override void Vibrate(VibrationType vibrationType, float intensity)
         {
             if (!IsVibrationAvailable())
             {
                 Debug.LogWarning("Vibration Util - Your device does not support Vibration");
                 return;
             }
+
+            this.intensity = intensity;
 
             switch (vibrationType)
             {
@@ -176,8 +186,6 @@ namespace VibrationUtility.Instance
             CreateOneShot(duration, amplitude);
         }
 
-
-
         private void CreateOneShot(long milliseconds, int amplitude)
         {
             var vibrateEffect = VibrationEffectClass.CallStatic<AndroidJavaObject>("createOneShot", new object[] { milliseconds, amplitude });
@@ -190,7 +198,7 @@ namespace VibrationUtility.Instance
             Vibrator.Call("vibrate", vibrateEffect);
         }
 
-        protected override bool IsVibrationAvailable()
+        public override bool IsVibrationAvailable()
         {
             var hasVibrator = Vibrator.Call<bool>("hasVibrator");
             return  hasVibrator && AndroidApiLevel >= 26;

@@ -31,7 +31,7 @@ namespace Sample
             }
         }
 
-        bool isInitialized = false;
+        //bool isInitialized = false;
         private BannerView banner;
         private InterstitialAd interAd;
         [SerializeField] private string bannerID = "ca-app-pub-3940256099942544/6300978111";
@@ -41,7 +41,7 @@ namespace Sample
         {
             MobileAds.Initialize((initStatus) =>
             {
-                isInitialized = true;
+                //isInitialized = true;
 
                 var text = Resources.Load<TextAsset>("admobID");
                 var ids = JsonUtility.FromJson<AdmobID>(text.ToString());

@@ -18,7 +18,13 @@ namespace VibrationUtility
 #elif UNITY_IOS
                 vibrationInstance = new VibrationIOS();
 #endif
-            }catch(Exception e)
+            }
+            catch (NotSupportedException e)
+            {
+                Debug.LogError($"Vibration Utility - {e}");
+                return;
+            }
+            catch (Exception e)
             {
                 Debug.LogError($"Vibration Utility - Failed to Initialize : {e}");
                 return;
@@ -51,9 +57,12 @@ namespace VibrationUtility
             return;
 #endif
 
-
             vibrationInstance.VibrateCustom(pattern, amplitude);
+        }
 
+        public static bool IsVibrationAvailable()
+        {
+            return vibrationInstance.IsVibrationAvailable();
         }
     }
 

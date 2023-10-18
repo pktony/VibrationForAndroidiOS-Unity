@@ -2064,7 +2064,7 @@ MonoBehaviour:
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
   m_Text: 
   m_CaretBlinkRate: 0.85
-  m_CaretWidth: 1
+  m_CaretWidth: 3
   m_ReadOnly: 0
   m_RichText: 1
   m_GlobalFontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4612,7 +4612,7 @@ MonoBehaviour:
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
   m_Text: 
   m_CaretBlinkRate: 0.85
-  m_CaretWidth: 1
+  m_CaretWidth: 3
   m_ReadOnly: 0
   m_RichText: 1
   m_GlobalFontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6214,8 +6214,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 2150773298
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 0.5}
+    rgba: 2152681295
+  m_fontColor: {r: 0.31132078, g: 0.31132078, b: 0.31132078, a: 0.5}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -6719,7 +6719,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 10
   m_TargetDisplay: 0
@@ -6889,6 +6889,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1456992998}
   - component: {fileID: 1456992997}
+  - component: {fileID: 1456992999}
   m_Layer: 0
   m_Name: SampleCode
   m_TagString: Untagged
@@ -6909,6 +6910,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uis: {fileID: 1284056095}
+  nativeUtility: {fileID: 1456992999}
 --- !u!4 &1456992998
 Transform:
   m_ObjectHideFlags: 0
@@ -6924,6 +6926,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1456992999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456992996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fef226278b3c0484895837a8271f4155, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1503103968
 GameObject:
   m_ObjectHideFlags: 0
@@ -7050,8 +7064,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 2150773298
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 0.5}
+    rgba: 2152681295
+  m_fontColor: {r: 0.30980393, g: 0.30980393, b: 0.30980393, a: 0.5}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -7661,7 +7675,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ver.1.0
+  m_text: 'Desgined by jiyeonxchoi :: Ver.1.0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 214ad86a2540f458681be45e94dc6623, type: 2}
   m_sharedMaterial: {fileID: -4430965983848010334, guid: 214ad86a2540f458681be45e94dc6623, type: 2}

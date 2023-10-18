@@ -43,7 +43,7 @@ namespace VibrationUtility.Instance
             throw new System.NotImplementedException();
         }
 
-        protected override bool IsVibrationAvailable()
+        public override bool IsVibrationAvailable()
         {
             return true;
 		}
