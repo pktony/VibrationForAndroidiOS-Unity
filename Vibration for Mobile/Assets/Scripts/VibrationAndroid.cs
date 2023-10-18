@@ -9,7 +9,7 @@ namespace VibrationUtility.Instance
 
         public VibrationAndroid()
         {
-            if(Application.isEditor || !IsVibrationAvailable())
+            if(!IsVibrationAvailable())
                 throw new System.NotSupportedException();
         }
 

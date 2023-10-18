@@ -13,7 +13,9 @@ namespace VibrationUtility
 		{
             try
             {
-#if UNITY_ANDROID
+#if UNITY_EDITOR
+                vibrationInstance = new VibrationEditor();
+#elif UNITY_ANDROID
                 vibrationInstance = new VibrationAndroid();
 #elif UNITY_IOS
                 vibrationInstance = new VibrationIOS();
