@@ -21,12 +21,13 @@ Submit issues if you have any. I will reply to your issues ASAP.
 (Enhancement, bugs, advice, etc)
 
 ### Sample App
-[Vibration Test (AOS)](https://play.google.com/store/apps/details?id=com.IsDororok.VibrationTester)
+Google Play : [Vibration Tester](https://play.google.com/store/apps/details?id=com.IsDororok.VibrationTester)
 
 ## Installation
 - Copy all files in ./Assets/Scripts/
-  - VibrationAndroid.cs
   - VibrationInstance.cs
+  - VibrationAndroid.cs
+  - VibrationEditor.cs
   - VibrationIOS.cs
   - VibrationUtil.cs
 
@@ -82,7 +83,7 @@ public class AmplitudeType {}
 ```
 ###### Details
 Vibration Amplitude Types <br/>
-These values are adjusted by trial and error on Samsung Galaxy.<br/>
+These values are adjusted by trial and errors on Samsung Galaxy.<br/>
 
 <br/>
 
@@ -93,7 +94,7 @@ public class LengthType {}
 (Customized) Vibration length (duration) types <br/>
 These values are adjusted by trial and error on Samsung Galaxy.<br/>
 
-<br/>
+---
 
 ### VibrationAndroid
 ```
@@ -109,12 +110,13 @@ Implements vibration method for AOS </br>
 protected override bool IsVibrationAvailable();
 ```
 ###### Details
-Checks if the Android device supports the vibration API
+Checks if the Android device supports the vibration API.
+Checks 2 functions : HasVibrator && API Level >= 26
 ###### Returns
 - True : Available
 - False : Not Available
 
-</br>
+---
 
 ### VibrationIOS
 ```
@@ -123,6 +125,17 @@ public class VibrationIOS : VibrationInstance { }
 ###### Details
 Implements vibration method for iOS
 </br></br>
+
+#### IsVibrationAvailable
+```
+protected override bool IsVibrationAvailable();
+```
+###### Details
+Does not check availability for iOS for now. Always return true.
+###### Returns
+- True : Available
+
+---
 
 ### References
 - https://developer.apple.com/documentation/uikit/uinotificationfeedbackgenerator
