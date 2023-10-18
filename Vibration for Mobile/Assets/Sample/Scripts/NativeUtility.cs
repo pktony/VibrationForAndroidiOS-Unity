@@ -54,6 +54,7 @@ namespace Sample
 
         public void ShowToastPopup(string message)
         {
+            if (Application.isEditor) return;
 #if UNITY_ANDROID
             CurrentActivity.Call("runOnUiThread", new AndroidJavaRunnable(() =>
             {
