@@ -1,8 +1,8 @@
 {
   "name": "com.isdororok.vibrationutility",
-  "displayName": "Mobile Vibration For Unity",
+  "displayName": "Mobile Vibration Utility",
   "description": "Mobile Vibration Utility For Unity",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "unity": "2021.3",
   "license": "MIT",
   "repository": {
@@ -15,6 +15,7 @@
     "url": "https://github.com/pktony"
   },
   "dependencies": {},
+  "documentationUrl": "https://github.com/pktony/VibrationForAndroidiOS-Unity",
   "keywords": [
     "vibration",
     "android",
