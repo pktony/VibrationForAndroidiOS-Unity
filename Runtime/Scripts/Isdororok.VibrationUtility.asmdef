@@ -1,0 +1,21 @@
+{
+    "name": "Isdororok.VibrationUtility",
+    "rootNamespace": "",
+    "references": [
+        "GUID:316079277a14ef4428262ded51b5367b"
+    ],
+    "includePlatforms": [
+        "Android",
+        "Editor",
+        "iOS",
+        "macOSStandalone"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
